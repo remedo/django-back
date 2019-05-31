@@ -12,3 +12,4 @@ class Prescription(models.Model):
     reports= models.BinaryField()
     diagnosis= models.BinaryField()
     other= models.BinaryField()
+    
