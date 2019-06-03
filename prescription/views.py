@@ -21,4 +21,4 @@ def new(request):
     new_pres.medicines= request.POST['medicines']
     new_pres.diagnosis = request.POST['diagnosis']
     new_pres.timestamp = time.time()
-    new_pres.
+    new_pres.others= request.POST['others']
