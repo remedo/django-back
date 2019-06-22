@@ -1,0 +1,6 @@
+module.exports	Gruntfile.js	/^module.exports = function (grunt) {$/;"	f
+multiField	jquery.multifield.js	/^		this.localize_i18n={$/;"	p	class:localize_i18n
+multiField	jquery.multifield.js	/^	};$/;"	c
+defaults	jquery.multifield.js	/^	multiField.prototype = {$/;"	p	class:multiField
+newChild	jquery.multifield.js	/^			var newChild = $(this.config.section, this.$elem).last().clone().attr('style', '').attr('id', '').fadeIn('fast');$/;"	v
+$.fn.multifield	jquery.multifield.js	/^	multiField.defaults = multiField.prototype.defaults;$/;"	f

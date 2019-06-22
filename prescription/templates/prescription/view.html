@@ -1,42 +1,81 @@
-<table>
-  <th>Prescription</th>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{pres.prescription_id}}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+
+<table class="table" border="true">
+  <thead>
+    <h1 align="center">Prescription</h1>
+  </thead>
+
   <tr>
-    <td>ID</td>
+    <th scope="col">ID</th>
     <td>{{pres.prescription_id}}</td>
   </tr>
   <tr>
-    <td>Patient ID</td>
-    <td>{{pres.patient_id}}</td>
+    <th>Patient ID</td>
+    <td>{{pres.patient_id.patient_id}}</td>
   </tr>
   <tr>
-    <td>Doctor ID</td>
-    <td>{{pres.doctor_id}}</td>
+    <th>Doctor ID</td>
+    <td>{{pres.doctor_id.doctor_id}}</td>
   </tr>
   <tr>
-    <td>Timestamp</td>
+    <th>Timestamp</td>
     <td>{{pres.timestamp}}</td>
   </tr>
   <tr>
-    <td>Medicines</td>
+    <th>Medicines</td>
     <td>
-      <ul>
-        {% for item in pres.medicines %}
-        <li>{{ item }}</li>
+    <table class="table" border="solid">
+      <thead>
+
+
+      <tr>
+        <th>Medicine Name</th>
+        <th>Dose Per Day</th>
+        <th>No Of Days</th>
+        <th>Notes</th>
+      </tr>
+
+ </thead>
+ <tbody>
+
+
+      {% for medicine in medicines %}
+    <tr>
+        {% for i in medicine %}
+        <td>
+          {{i}}
+        </td>
         {% endfor %}
-      </ul>
+      </tr>
+      {% endfor %}
+       </tbody>
+    </table>
+
+
     </td>
   </tr>
   <tr>
     <td>Diagnosis</td>
     <td>
-      <ul>
-        {% for item in pres.diagnosis %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
+      <table class="table">
+
+                {% for item in diagnosis %}
+                  <tr><td>{{item}}</td></tr>
+                {% endfor %}
+      </table>
+
+
+
     </td>
   </tr>
-  tr>
+  <tr>
     <td>Reports</td>
     <td>
       <ul>
@@ -48,3 +87,6 @@
   </tr>
 
 </table>
+
+</body>
+</html>
