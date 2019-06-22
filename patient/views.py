@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 import hashlib
 
 # Create your views here.
-def login(request,message):
+def login(request):
     if (request.method=="POST"):
         if "email" in request.POST:
             p=Patient.objects.filter(email=request.POST.get("email"))[0]
@@ -13,7 +13,7 @@ def login(request,message):
                 request.session["user_type"]="patient"
                 request.session["user"]=p.patient_id
                 return HttpResponseRedirect('/dash/')
-    return render(request,'patient/login.html')
+    return render(request,'patient/login.html',{ "message":"Login"})
 def change_pass(request):
     if request.method == "POST":
         if "user" in request.session and request.session.get("user_type")=="patient":
