@@ -1,0 +1,64 @@
+{% extends 'doctor/dash.html' %}
+{% block content %}
+{% load pickle_tags %}
+{% load_data doctor.appointments as appointments %}
+ <style>
+ .table-sortable tbody tr {
+     cursor: move;
+ }
+ </style>
+<h1 class="display-3 " align="center">Appointment Book </h1>
+<h2 class="display-2 " align="center">{{ message}} </h2>
+<form class="" action="/doctor/get_slots" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+
+    <input class="form-control" type="date" name="date" value="2000-11-10">
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+  </div>
+</form>
+<form class="" action="/doctor/add_appointment" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <input class="form-controls" type="text" name="patient_id" value="">
+  </div>
+  <div class="form-group">
+    <select class="form-control" name="slots" multiple>
+      {% for slot in total_slots %}
+      <option value={{slot}}>{{ slot }}</option>
+      {% endfor %}
+    </select>
+
+
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+  </div>
+  </form>
+  <div class="container">
+    <h1>Appointments</h1>
+
+    <table class="table table-bordered">
+      <thead>
+        <th>Date</th>
+        <th>Patient Id</th>
+        <th>Slots</th>
+      </thead>
+      <tbody>
+
+
+          {% for appointment in appointments %}
+          <tr>
+          <td>{{appointment.date}}</td>
+          <td>{{appointment.patient_id}}</td>
+          <td>{{appointment.slot}}</td>
+            </tr>
+          {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+ {% endblock %}

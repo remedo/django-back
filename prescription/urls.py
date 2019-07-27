@@ -4,5 +4,5 @@ urlpatterns = [
 	path('',views.index,name='index'),
 	path('pres_view', views.pres_view, name='view'),
 	path('new',views.new,name ='new'),
-	path('{prescription_id}',views.display,name='display')
+	path('<str:prescription_id>/',views.display,name='display')
 ]

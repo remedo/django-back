@@ -1,0 +1,159 @@
+{% extends 'doctor/dash.html' %}
+{% block content %}
+{% load pickle_tags %}
+{% load_data doctor.slots as slots %}
+  <style>
+  .table-sortable tbody tr {
+      cursor: move;
+  }
+  </style>
+<h1 class="display-3 " align="center">Slot Setter </h1>
+<form action="/doctor/slots_setter" method="post">
+   {% csrf_token %}
+  <div class="form-group fieldWrapper">
+<label for="start_time">Start Time </label>
+<input type="time" name="start_time" id="start_time" value={{slots.start_time}} id="start_time" required="">
+  </div>
+  <div class="form-group fieldWrapper">
+    <label for="end_time">End Time </label>
+    <input type="time" name="end_time" id="end_time" value={{slots.end_time}} id="end_time" required>
+  </div>
+  <div class="form-group fieldWrapper" >
+    <label for="slot_interval">Slot Interval </label>
+    <input class="form-group" value={{slots.slot_interval}} type="number" name="slot_interval" id="slot_interval" min="5" max="120" step="5">
+    <small id="info_interval" class="form-text text-muted">Enter the time in minutes.</small>
+  </div>
+  <div class="container fieldWrapper form-group">
+      <div >
+            <label for="day0">Days Off:</label>
+      </div>
+
+
+
+           <div class="row clearfix">
+            <div class="col-md-12 table-responsive">
+            <table class="table table-bordered table-hover table-sortable" id="tab_day_logic">
+
+              <tbody>
+                  <tr class="d-none" id='day0' data-id="0">
+                  <td data-name="day">
+
+                     <select  class="form-control" name="day0">
+                       <option  value="monday">Monday</option>
+                       <option value="tuesday">Tuesday</option>
+                       <option value="wednesday">Wednesday</option>
+                       <option value="thursday">Thursday</option>
+                       <option value="friday">Friday</option>
+                       <option value="saturday">Saturday</option>
+                       <option  value="sunday">Sunday</option>
+                     </select>
+                  </td>
+
+                               <td data-name="del">
+                                   <button name="del1" class='btn btn-danger row-remove'><i class="fas fa-trash-alt"></i><span aria-hidden="true"></span></button>
+                               </td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+        <button type="button" id="add_row_day" class="btn btn-primary float-right">Add More Days</button>
+       </div>
+
+    </div>
+    <div class="container fieldWrapper form-group">
+      <div >
+            <label for="date0">Breaks:</label>
+      </div>
+
+
+
+           <div class="row clearfix">
+            <div class="col-md-12 table-responsive">
+            <table class="table table-bordered table-hover table-sortable" id="tab_break_logic">
+              <thead>
+                <tr>
+                  <th>Break Start Time</th>
+                  <th>Break End Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr class="d-none" id='break0' data-id="0">
+                  <td data-name="break_start_time">
+                     <input  type="time"  class="form-control" name="break_start_time0" value="13:00">
+
+                  </td>
+                  <td data-name="break_end_time">
+                     <input  type="time"   class="form-control" name="break_end_time0"  value="14:00">
+
+                  </td>
+
+                               <td data-name="del">
+                                   <button type="button" name="del1" class='btn btn-danger row-remove'><i class="fas fa-trash-alt"></i><span aria-hidden="true"></span></button>
+                               </td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+        <button type="button" id="add_row_break" class="btn btn-primary float-right">Add Break</button>
+       </div>
+
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+    </div>
+</form>
+<div class="container">
+  <h1>CurrentSlot Info</h1>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Slot Interval</th>
+      <th>Days Off</th>
+      <th>Break Start Time</th>
+      <th>Break End Time</th>
+    </thead>
+    <tbody>
+      <tr>
+      <td>{{ slots.start_time }}</td>
+      <td>{{ slots.end_time }}</td>
+      <td>{{ slots.slot_interval }}</td>
+      <td>
+        <ul>
+            {% for day in slots.days_off %}
+          <li> {{ day.0 }}</li>
+           {% endfor %}
+        </ul>
+</td>
+      <td>
+        <ul>
+          {% for break in slots.breaks %}
+          <li>
+            {{ break.0 }}
+          </li>
+          {% endfor %}
+        </ul>
+
+
+      </td>
+      <td>
+        <ul >
+          {% for break in slots.breaks %}
+          <li>
+            {{ break.1 }}
+          </li>
+          {% endfor %}
+        </ul>
+
+
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% load staticfiles %}
+<script src="{% static "doctor/script/jquery.multifield.min.js" %}"></script>
+{% endblock %}

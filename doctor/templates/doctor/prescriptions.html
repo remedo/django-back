@@ -1,0 +1,57 @@
+{% extends 'doctor/dash.html' %}
+{% load pickle_tags %}
+
+{% block content %}
+
+
+    <table class="table">
+      <thead>
+        <th>Prescription ID</th>
+        <th>Prescription Date And Time</th>
+        <th>Diagnosis</th>
+        <th>Medicines</th>
+      </thead>
+
+      {% for prescription in prescriptions %}
+      <tr>
+        <td>{{ prescription.prescription_id}}</td>
+        <td>{{ prescription.timestamp }}</td>
+        <td>
+          {% load_data prescription.diagnosis as diagnosis %}
+            <ul>
+              {% for diagnosis in diagnosis %}
+
+            <li>{{diagnosis}}</li>
+              {% endfor %}
+          </ul>
+        </td>
+        <td>
+          {% load_data prescription.medicines as medicines %}
+          <ul>
+          {% for medicine in medicines%}
+           <li>{{medicine}}</li>
+          {% endfor %}
+
+            </ul>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  <div class="pagination">
+    <span class="step-links">
+        {% if prescriptions.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ prescriptions.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ prescriptions.number }} of {{ prescriptions.paginator.num_pages }}.
+        </span>
+
+        {% if prescriptions.has_next %}
+            <a href="?page={{ prescriptions.next_page_number }}">next</a>
+            <a href="?page={{ prescriptions.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

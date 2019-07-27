@@ -3,7 +3,7 @@ import hashlib
 
 # Create your models here.
 class Patient(models.Model):
-    patient_id= models.CharField(max_length=20,unique=True)
+    patient_id= models.AutoField(primary_key=True,unique=True)
     name= models.CharField(max_length=20)
     dob= models.DateField()
     password=models.CharField(max_length=100,default=hashlib.sha256(str(patient_id).encode()).hexdigest())
@@ -12,3 +12,4 @@ class Patient(models.Model):
     add = models.CharField(max_length=100)
     email=models.CharField(max_length=50)
     phone=models.CharField(max_length=10)
+    appointments=models.BinaryField(null=True)

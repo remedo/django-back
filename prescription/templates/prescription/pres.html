@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+{% extends 'doctor/dash.html' %}
+{% block content %}
 
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <style>
     .table-sortable tbody tr {
         cursor: move;
     }
     </style>
-    <title>Prescription {{prescription_id}}</title>
-  </head>
-  <body>
+
     <h1 class="display-3 " align="center">Prescription</h1>
     <div class="container">
       <form action="/pres/pres_view" method="post">
@@ -27,7 +17,7 @@
         </div>
 
     <div class="col-sm-10">
-      <input type="text" name="patient_id" class="form-control"  maxlength="100" required="" id="id_patient_id">
+      <input type="text" name="patient_id" class="form-control"  maxlength="100"  id="id_patient_id" required="">
     </div>
 
       </div>
@@ -45,20 +35,20 @@
         <table class="table table-bordered table-hover table-sortable" id="tab_diag_logic">
 
           <tbody>
-              <tr class="hidden" id='diag0' data-id="0">
+              <tr class="d-none" id='diag0' data-id="0">
               <td data-name="diagnosis">
                  <input class="form-control" type="text" name="diagnosis0"  >
               </td>
 
                            <td data-name="del">
-                               <button name="del1" class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true"></span></button>
+                               <button type="button" name="del1" class='btn btn-danger row-remove'><i class="fas fa-trash-alt"></i><span aria-hidden="true"></span></button>
                            </td>
             </tr>
           </tbody>
         </table>
 
     </div>
-    <a id="add_row_diag" class="btn btn-primary float-right">Add Diagnosis</a>
+    <button type="button" id="add_row_diag" class="btn btn-primary float-right">Add Diagnosis</button>
    </div>
 
 </div>
@@ -85,7 +75,7 @@
    					</tr>
    				</thead>
    				<tbody>
-       				<tr id='addr0' data-id="0" class="hidden">
+       				<tr id='addr0' data-id="0" class="d-none">
    						<td data-name="medicinesName">
                  <input class="form-control" type="text" name="medicinesName0"  >
    						</td>
@@ -101,18 +91,18 @@
    </textarea>
    						</td>
                            <td data-name="del">
-                               <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true"></span></button>
+                               <button type="button" name="del0" class='btn btn-danger'><i class="fas fa-trash-alt"></i><span aria-hidden="true"></span></button>
                            </td>
    					</tr>
    				</tbody>
    			</table>
    		</div>
    	</div>
-   	<a id="add_row" class="btn btn-primary float-right">Add Medicine</a>
+   	<button type="button" name="button" class="btn btn-primary float-right"  id="add_row" >Add Medicine</button>
    </div>
 
     <div class="form-group">
-      <input class="btn submit" type="submit" name="button"></input>
+      <button class="btn btn-primary" type="submit" name="button">Submit</button>
     </div>
       </form>
     </div>
@@ -120,6 +110,4 @@
     <!-- jQuery Multifield -->
     {% load staticfiles %}
     <script src="{% static "prescription/script/jquery.multifield.min.js" %}"></script>
-
-  </body>
-</html>
+{% endblock %}
