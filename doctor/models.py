@@ -10,7 +10,7 @@ class Doctor(models.Model):
     reg_no= models.CharField(max_length=20)
     spl= models.CharField(max_length=20)
     work_add= models.CharField(max_length=100)
-    password=models.CharField(max_length=100,default=hashlib.sha256(str(doctor_id).encode()).hexdigest())
+    password=models.CharField(max_length=100,default=hashlib.sha256(str(0).encode()).hexdigest())
     phone=models.CharField(max_length=10,default="0")
     slots=models.BinaryField(null=True)
     appointments=models.BinaryField(null=True)

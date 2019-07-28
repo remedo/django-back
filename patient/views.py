@@ -7,7 +7,7 @@ import hashlib
 from django.core.paginator import Paginator
 
 
-# Create your views here.
+# Login View for user type patient
 def login(request):
     if (request.method=="POST"):
         if "email" in request.POST:
